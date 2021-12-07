@@ -33,13 +33,6 @@
         </div>
       </div>
       <div class="form-group">
-        <button [disabled]="loading || form.invalid" class="btn btn-primary">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          Register
-        </button>
-        <a routerLink="../login" class="btn btn-link">Cancel</a>
-      </div>
-      <div class="form-group">
         <label for="registrationReferrerId">How I heard about the site:</label>
         <select formControlName="registrationReferrerId"
                 class="form-control"
@@ -56,6 +49,13 @@
         <div *ngIf="f.registrationReferrerCustomText.touched && f.registrationReferrerCustomText.errors" class="invalid-feedback">
           <div *ngIf="f.registrationReferrerCustomText.errors.required">Field is required</div>
         </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading || form.invalid" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Register
+        </button>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
       </div>
     </form>
   </div>

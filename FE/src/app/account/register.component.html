@@ -1,0 +1,63 @@
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  {{getFormValidationErrors() | json}}
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': f.firstName.touched && f.firstName.errors }" />
+        <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }" />
+        <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username">Email:</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
+        <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Email is required</div>
+          <div *ngIf="f.username.errors.email">Please enter a valid email.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
+        <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading || form.invalid" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Register
+        </button>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
+      </div>
+      <div class="form-group">
+        <label for="registrationReferrerId">How I heard about the site:</label>
+        <select formControlName="registrationReferrerId"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.registrationReferrerId.touched && f.registrationReferrerId.errors }">
+          <option *ngFor="let referrer of referrers" [ngValue]="referrer.id">{{referrer.name}}</option>
+        </select>
+        <div *ngIf="f.registrationReferrerId.touched && f.registrationReferrerId.errors" class="invalid-feedback">
+          <div *ngIf="f.registrationReferrerId.errors.required">Please tell us where you heard about the site</div>
+        </div>
+      </div>
+      <div *ngIf="canShowManualReferrerInput" class="form-group">
+        <input type="text" formControlName="registrationReferrerCustomText" class="form-control"
+               [ngClass]="{ 'is-invalid': f.registrationReferrerCustomText.touched && f.registrationReferrerCustomText.errors }" />
+        <div *ngIf="f.registrationReferrerCustomText.touched && f.registrationReferrerCustomText.errors" class="invalid-feedback">
+          <div *ngIf="f.registrationReferrerCustomText.errors.required">Field is required</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

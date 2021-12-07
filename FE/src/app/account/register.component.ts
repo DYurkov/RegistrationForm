@@ -83,17 +83,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       });
   }
 
-  getFormValidationErrors() {
-    Object.keys(this.form.controls).forEach(key => {
-      const controlErrors: ValidationErrors = this.form.get(key).errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-  }
-
   ngOnDestroy(): void { }
 
   customUserRegistrationValidator(): ValidatorFn {
